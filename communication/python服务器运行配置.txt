@@ -1,0 +1,7 @@
+1、更改host中DNS记录
+127.0.0.1	chat.example.net
+127.0.0.1	portal.example.com
+2、安装python（包含了SimpleHTTPServer Web服务器）
+3、打开项目目录
+4、启动Web服务器：python -m SimpleHTTPServer 9999
+5、打开浏览器进入页面：http://portal.example.com:9999/postMessagePortal.html

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>widget</title>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<script>
+	var targetOrigin = "http://portal.example.com:9999";
+	function messageHandler (e) {
+		if (e.origin == targetOrigin) {document.getElementById("status").textContent = e.data} else{};
+	}
+	function sendString (str) {
+		window.top.postMessage(str, targetOrigin);
+		console.log("已发送");
+	}
+	function sendNotify () {
+		messageText = document.getElementById("messageText").value;
+		sendString(messageText);
+		
+	}
+	function loadDemo () {
+		document.getElementById("actionButton").addEventListener("click", sendNotify, true);
+		
+	}
+	window.addEventListener("load", loadDemo, true);
+	window.addEventListener("message", messageHandler, true);
+	</script>
+</head>
+<body>
+	<h1>Widget iframe</h1>
+	<p><b>Origin: </b>http://chat.example.net:9999</p>
+	<p>Status set to: <strong id="status"></strong> by containing portal.</p>
+	<div>
+		<input id="messageText" value="部件通知"></input>
+		<button id="actionButton">发送通知</button>
+	</div>
+	<p>聊天部件会请求门户页面通过父页面标题内容闪烁的方式通知用户，如果这个消息事件不是来源于http://chat.example.net:9999，门户页面会忽略此消息</p>
+</body>
+</html>
